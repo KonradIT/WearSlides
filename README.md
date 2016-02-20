@@ -7,15 +7,19 @@ Control your presentation from your Android Wear watch.
 * Minimal controls, only Previous slide and Next slide
 * Works with most presentation softwares (MS Office/LibreOffice/OpenOffice/Prezi...)
 * Only requires Python, PIP and Flask to work (portable .exe coming soon)
-* Offline mode for Android Wear watch (in case you dont have smartphone right there)
 * and probably more...
+
+###To do:
+* Offline mode for Android Wear watch (in case you dont have smartphone right there)
+* Portable .exe webserver
+* Add timer
 
 ###Downloads:
 
 #####Smartphone app (syncs to Watch):
 
 * Releases: http://github.com/KonradIT/WearSlides
-* Google Play: soon
+* Google Play: https://play.google.com/store/apps/details?id=com.chernowii.wearslides
 
 #####Computer app:
 

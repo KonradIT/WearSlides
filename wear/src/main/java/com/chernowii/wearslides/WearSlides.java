@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.WatchViewStub;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +21,7 @@ import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 
-public class WearSlides extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class WearSlides extends WearableActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
     private static final String next = "/next";
     private static final String prev = "/prev";
     Node wearNode;
@@ -37,6 +38,7 @@ public class WearSlides extends Activity implements GoogleApiClient.ConnectionCa
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
+        setAmbientEnabled();
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
@@ -111,6 +113,28 @@ public class WearSlides extends Activity implements GoogleApiClient.ConnectionCa
 
         }
 
+    }
+    @Override
+    public void onEnterAmbient(Bundle ambientDetails) {
+        super.onEnterAmbient(ambientDetails);
+        ImageButton setOn = (ImageButton) findViewById(R.id.prev);
+        ImageButton setOff = (ImageButton) findViewById(R.id.next);
+        TextView AmbientText = (TextView) findViewById(R.id.ambient);
+        setOn.setVisibility(View.INVISIBLE);
+        setOff.setVisibility(View.INVISIBLE);
+        AmbientText.setVisibility(View.VISIBLE);
+
+    }
+    @Override
+    public void onExitAmbient() {
+        super.onExitAmbient();
+
+        ImageButton setOn = (ImageButton) findViewById(R.id.prev);
+        ImageButton setOff = (ImageButton) findViewById(R.id.next);
+        TextView AmbientText = (TextView) findViewById(R.id.ambient);
+        setOn.setVisibility(View.VISIBLE);
+        setOff.setVisibility(View.VISIBLE);
+        AmbientText.setVisibility(View.INVISIBLE);
     }
     @Override
     protected void onStart() {

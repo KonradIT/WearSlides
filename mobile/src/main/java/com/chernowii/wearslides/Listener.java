@@ -1,5 +1,7 @@
 package com.chernowii.wearslides;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -26,18 +28,21 @@ import java.io.InputStreamReader;
 public class Listener extends WearableListenerService {
     private static final String prev = "/prev";
     private static final String next = "/next";
-
-
-
+    public static final String PREFS_NAME = "Preferences";
+    public static final String ipsetting = "ip_address";
+    public String IPADDRESS = "";
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
+        SharedPreferences settings;
+        settings = getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); //1
+        IPADDRESS = settings.getString(ipsetting, null); //2
         if (messageEvent.getPath().equals(prev)) {
-            new HttpAsyncTask().execute("http://IPADDRESS:5000/prev");
+            new HttpAsyncTask().execute("http://" + IPADDRESS + ":5000/prev");
 
         }
 
         if (messageEvent.getPath().equals(next)) {
-            new HttpAsyncTask().execute("http://IPADDRESS:5000/next");
+            new HttpAsyncTask().execute("http://" + IPADDRESS + ":5000/next");
 
         }
 

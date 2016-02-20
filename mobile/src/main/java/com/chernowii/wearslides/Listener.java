@@ -32,12 +32,12 @@ public class Listener extends WearableListenerService {
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
         if (messageEvent.getPath().equals(prev)) {
-            new HttpAsyncTask().execute("http://192.168.1.41:5000/prev");
+            new HttpAsyncTask().execute("http://IPADDRESS:5000/prev");
 
         }
 
         if (messageEvent.getPath().equals(next)) {
-            new HttpAsyncTask().execute("http://192.168.1.41:5000/next");
+            new HttpAsyncTask().execute("http://IPADDRESS:5000/next");
 
         }
 

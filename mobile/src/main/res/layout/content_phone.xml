@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/ipbox"
         android:hint="IP Address"
-        android:inputType="number"
         android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/setip" />

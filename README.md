@@ -30,3 +30,7 @@ NOTE: The computer needs to have Python installed, as well as PIP and Flask.
 To install them: [Download Python](http://python.org) , [Download and Install PIP](https://pip.pypa.io/en/latest/installing/#installing-with-get-pip-py) , Once Python and PIP are installed, type in command line: `pip install flask` (run as Admin/Sudo)
  
 A portable .exe file (for carrying in Pendrives) is coming soon
+
+###Video
+
+How to install/configure/etc... https://youtu.be/o8M0rRYRMt8

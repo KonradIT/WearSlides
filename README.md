@@ -18,17 +18,25 @@ Control your presentation from your Android Wear watch.
 
 #####Smartphone app (syncs to Watch):
 
-* Releases: http://github.com/KonradIT/WearSlides
+* Releases: http://github.com/KonradIT/WearSlides/releases
 * Google Play: https://play.google.com/store/apps/details?id=com.chernowii.wearslides
 
-#####Computer app:
+#####Computer script:
 
 [WearSlides.py](WearSlides.py)
 
 NOTE: The computer needs to have Python installed, as well as PIP and Flask.
 
+Depending on the OS, it needs to have additional modules installed that control the keys:
+
+* Windows: ctypes
+* Linux: PyUserInput (Which needs Xlib)
+
 To install them: [Download Python](http://python.org) , [Download and Install PIP](https://pip.pypa.io/en/latest/installing/#installing-with-get-pip-py) , Once Python and PIP are installed, type in command line: `pip install flask` (run as Admin/Sudo)
  
+PyUserInput: `pip install PyUserInput`
+
+Xlib: `sudo apt-get install python-xlib`
 A portable .exe file (for carrying in Pendrives) is coming soon
 
 ###Video

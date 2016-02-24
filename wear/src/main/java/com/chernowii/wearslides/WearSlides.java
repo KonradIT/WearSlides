@@ -3,6 +3,7 @@ package com.chernowii.wearslides;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.WatchViewStub;
@@ -20,6 +21,8 @@ import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
+
+import java.util.concurrent.TimeUnit;
 
 public class WearSlides extends WearableActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
     private static final String next = "/next";
@@ -57,9 +60,36 @@ public class WearSlides extends WearableActivity implements GoogleApiClient.Conn
                         sendNext();
                     }
                 });
+                TextView setTimer = (TextView) findViewById(R.id.timer);
+                setTimer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startTimer();
+                    }
+                });
             }
         });
     }
+
+public void startTimer(){
+    final TextView setTimer = (TextView) findViewById(R.id.timer);
+
+    new CountDownTimer(300000, 1000) { // adjust the milli seconds here
+        public void onTick(long millisUntilFinished) {
+            setTimer.setText("" + String.format("%d min, %d sec",
+                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+        }
+
+        public void onFinish() {
+            setTimer.setText("done!");
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            v.vibrate(400);
+
+        }
+    }.start();
+}
     private void sendPrev() {
         if (wearNode != null && wearGoogleApiClient!=null && wearGoogleApiClient.isConnected()) {
             Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);

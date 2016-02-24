@@ -12,7 +12,7 @@ Control your presentation from your Android Wear watch.
 ###To do:
 * Offline mode for Android Wear watch (in case you dont have smartphone right there)
 * Portable .exe webserver
-* Add timer
+* ~~Add timer~~
 
 ###Downloads:
 

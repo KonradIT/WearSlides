@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter the IP Address of the host computer (tip: ipconfig for Windows or hostname -I for Linux)"
+        android:text="The webserver must running on the computer, go to http://github.com/KonradIT/WearSlides to download it and configure it. There is a .exe file for Windows that you just download and run. There is also a Python file for Linux/Mac.\n\nEnter the IP Address of the host computer, shown by IPv4 Address in the IP Address box, and type the port in the Port textbox. The terminal should display a text saying &quot;Running on http://0.0.0.0:XXXX&quot;, write down those four numbers in the Port box below. Then tap on start button, and open the app in your android wear watch."
         android:id="@+id/textView" />
     <EditText
         android:layout_width="wrap_content"
@@ -23,19 +23,75 @@
         android:hint="IP Address"
         android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/setip" />
+        android:layout_toStartOf="@+id/port" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/port"
+        android:hint="Port number"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentEnd="true" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/setip"
-        android:text="Set IP Address"
-        android:layout_below="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
+        android:text="START"
+        android:id="@+id/config"
+        android:layout_below="@+id/ipbox"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_below="@+id/config"
+        android:layout_alignParentStart="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Remember that you need to have the webserver running on the computer, go to http://github.com/KonradIT/WearSlides to download it and configure it."
-        android:layout_below="@+id/ipbox"
+        android:text="Make sure your phone is connected to the same WiFi network as the computer!"
+        android:id="@+id/textView2"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connected to: "
+        android:id="@+id/textView4"
+        android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WiFi"
+        android:id="@+id/wifi"
+        android:layout_below="@+id/textView2"
+        android:layout_toEndOf="@+id/textView4" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toast on phone"
+        android:id="@+id/toast"
+        android:layout_alignParentStart="true"
+        android:checked="true"
+        android:layout_below="@+id/textView3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Misc settings:"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp" />
+
 </RelativeLayout>
 

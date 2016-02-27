@@ -30,19 +30,24 @@ public class Listener extends WearableListenerService {
     private static final String next = "/next";
     public static final String PREFS_NAME = "Preferences";
     public static final String ipsetting = "ip_address";
+    public static final String portsetting = "ip_port";
+    public static final String toastMessage = "toast_phone";
     public String IPADDRESS = "";
+    String Port = "";
+    String toastStatus = "";
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
         SharedPreferences settings;
         settings = getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); //1
-        IPADDRESS = settings.getString(ipsetting, null); //2
+        IPADDRESS = settings.getString(ipsetting, null);
+        Port = settings.getString(portsetting, null);//2
         if (messageEvent.getPath().equals(prev)) {
-            new HttpAsyncTask().execute("http://" + IPADDRESS + ":5000/prev");
+            new HttpAsyncTask().execute("http://" + IPADDRESS + ":" + Port + "/prev");
 
         }
 
         if (messageEvent.getPath().equals(next)) {
-            new HttpAsyncTask().execute("http://" + IPADDRESS + ":5000/next");
+            new HttpAsyncTask().execute("http://" + IPADDRESS + ":" + Port + "/next");
 
         }
 
@@ -104,7 +109,15 @@ public class Listener extends WearableListenerService {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), "Done!", Toast.LENGTH_SHORT).show();
+            SharedPreferences settings;
+            settings = getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); //1
+            toastStatus = settings.getString(toastMessage, null);
+            if (toastStatus != null) {
+                if (toastStatus.equals("true")){
+                    Toast.makeText(getBaseContext(), "Command sent!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
             ;
         }
     }

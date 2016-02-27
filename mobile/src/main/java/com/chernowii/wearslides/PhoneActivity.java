@@ -2,6 +2,9 @@ package com.chernowii.wearslides;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.wifi.SupplicantState;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,40 +14,65 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class PhoneActivity extends AppCompatActivity {
     String IpAddress = "";
+    String Port = "";
+    String toastStatus = "";
     public static final String PREFS_NAME = "Preferences";
     public static final String ipsetting = "ip_address";
+    public static final String portsetting = "ip_port";
+    public static final String toastMessage = "toast_phone";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Button setOn = (Button) findViewById(R.id.setip);
-        setOn.setOnClickListener(new View.OnClickListener() {
+        Button config = (Button) findViewById(R.id.config);
+        config.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setIP();
+                configure();
             }
         });
+        WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo;
+
+        wifiInfo = wifiManager.getConnectionInfo();
+        if (wifiInfo.getSupplicantState()== SupplicantState.COMPLETED) {
+            TextView wifi = (TextView) findViewById(R.id.wifi);
+            wifi.setText(wifiInfo.getSSID());
+        }
 
     }
-    public void setIP(){
+    public void configure(){
         EditText IPADDRESS = (EditText) findViewById(R.id.ipbox);
         IpAddress = IPADDRESS.getText().toString();
+        EditText PORT = (EditText) findViewById(R.id.port);
+        Port = PORT.getText().toString();
+        boolean isChecked = ((CheckBox) findViewById(R.id.toast)).isChecked();
+        if (isChecked){
+            toastStatus = "true";
+        }
+        else{
+            toastStatus = "false";
+        }
         SharedPreferences settings;
         SharedPreferences.Editor editor;
         settings = getApplicationContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE); //1
         editor = settings.edit(); //2
 
         editor.putString(ipsetting, IpAddress);
+        editor.putString(portsetting, Port);
+        editor.putString(toastMessage, toastStatus);
         editor.commit();
-        Toast.makeText(getApplicationContext(),"IP Set! " + IpAddress, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"All set! " + IpAddress, Toast.LENGTH_SHORT).show();
 
     }
 

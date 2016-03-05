@@ -74,7 +74,7 @@ public class WearSlides extends WearableActivity implements GoogleApiClient.Conn
 public void startTimer(){
     final TextView setTimer = (TextView) findViewById(R.id.timer);
 
-    new CountDownTimer(300000, 1000) { // adjust the milli seconds here
+    new CountDownTimer(300000, 1000) {
         public void onTick(long millisUntilFinished) {
             setTimer.setText("" + String.format("%d min, %d sec",
                     TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),

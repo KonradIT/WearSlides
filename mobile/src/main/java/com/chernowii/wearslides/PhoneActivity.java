@@ -1,7 +1,9 @@
 package com.chernowii.wearslides;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -91,8 +93,23 @@ public class PhoneActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id){
+            case R.id.action_more_apps:
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pub:Konrad Iturbe - Chernowii")));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/search?q=pub:Konrad Iturbe - Chernowii")));
+                }
+
+                return true;
+            case R.id.action_donate:
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.chernowii.donate")));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chernowii.donate")));
+                }
+
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
